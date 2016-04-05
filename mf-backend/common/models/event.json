@@ -1,0 +1,37 @@
+{
+  "name": "event",
+  "plural": "events",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "from": {
+      "type": "date",
+      "required": true
+    },
+    "to": {
+      "type": "date"
+    },
+    "description": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "user": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "userId"
+    },
+    "participants": {
+      "type": "hasMany",
+      "model": "user",
+      "foreignKey": "userId",
+      "through": "eventParticipant"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
