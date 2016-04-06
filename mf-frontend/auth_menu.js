@@ -9,8 +9,6 @@ import React, {
     StyleSheet,
     Component
 } from 'react-native';
-var Progress = require('react-native-progress');
-var buffer = require('buffer');
 
 /*eslint-enable no-unused-vars*/
 
@@ -69,40 +67,26 @@ class Authorization extends Component {
             </View>
         );
     }
-
     onLoginPress() {
-        this.setState({ progressBar: <Progress.Circle size={30} indeterminate={true} borderWidth={2} style={{ alignItems : 'center', padding: 10 }}/> });
-        var buf = new buffer.Buffer(this.state.username + ':' + this.state.password);
-        var encodedAuth = buf.toString('base64');
-        console.log(encodedAuth);
-        fetch('https://api.github.com/user', {
-            headers: {
-                'Authorization':'Basic ' + encodedAuth
-            }
-        }).
-        then((response) => {
-            if (response.status >= 200 && response.status < 300) {
-                return response
-            }
-            throw {
-                badCredentials: response.status === 401,
-                unknownError: response.status !== 401
-            }
-        }).
-        then((response) => response.json()).
-        then((results) => {
-            console.log(results);
-          }
-        ).
-          catch((err) => this.setState(err)
-        ).
-          finally(() => {
-                this.setState({progressBar: null});
-                this.props.navigator.push({
-                    view_id: 1
-                })
-            }
-        )
+        const Progress = require('react-native-progress');
+        const UserService = require('./services/userService');
+        
+        this.setState({ progressBar: <Progress.Circle size={30} indeterminate={true} borderWidth={2} style={{ alignItems: 'center', padding: 10 }}/> });
+        
+        const userService = new UserService();
+        userService.login(this.state.username, this.state.password)
+            .then((loggedIn) => {
+                if (loggedIn === true) {
+                    this.props.navigator.push({
+                        view_id: 1
+                    });
+                }
+            })
+            .catch((err) => this.setState(err))
+            .finally(() => {
+                    this.setState({ progressBar: null });
+                }
+            );
     }
 
 }
