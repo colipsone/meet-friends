@@ -21,6 +21,8 @@ import FacebookTabBar from './FacebookTabBar';
 import Icon from 'react-native-vector-icons/Ionicons';
 import CalendarPicker from 'react-native-calendar-picker';
 import AuthorizationMenu from './auth_menu';
+import CreateEvent from './create_event';
+
 
 /*eslint-enable no-unused-vars*/
 
@@ -43,14 +45,16 @@ var NewProject = React.createClass({
          return <Events navigator={navigator}/>
      } else if (route.view_id === 2) {
          return <EventDetails navigator={navigator} event_id={route.event_id}/>
-     }
+     } else if (route.view_id === 3) {
+    return <CreateEvent navigator={navigator}/>
+    }
   },
   render : function() {
       return (
 
            <ScrollableTabView tabBarPosition={"bottom"} renderTabBar={() => <FacebookTabBar someProp={'here'} />}>
               <Navigator tabLabel="bag"
-                  initialRoute={{ view_id: 0 }}
+                  initialRoute={{ view_id: 3 }}
                   renderScene={this._renderScene}
               />
               <Text tabLabel="ios-world" >t</Text>
@@ -65,33 +69,5 @@ var NewProject = React.createClass({
       )
     }
 });
-
-// const styles = StyleSheet.create({
-//     container: {
-//     flex: 1,
-//     flexDirection: 'row',
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//     backgroundColor: '#F5FCFF'
-//   },
-//   spinner: {
-//       opacity: 1
-//   },
-//   thumbnail: {
-//       width: 53,
-//       height: 81
-//   },
-//     rightContainer: {
-//         flex: 1
-//     },
-//     title: {
-//         fontSize: 20,
-//         marginBottom: 8,
-//         textAlign: 'center'
-//     },
-//     year: {
-//         textAlign: 'center'
-//     }
-// });
 
 AppRegistry.registerComponent('NewProject', () => NewProject);
