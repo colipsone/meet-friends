@@ -69,7 +69,7 @@ class Authorization extends Component {
     }
     onLoginPress() {
         const Progress = require('react-native-progress');
-        const UserService = require('./services/userService');
+        const UserService = require('./../services/userService');
         
         this.setState({ progressBar: <Progress.Circle size={30} indeterminate={true} borderWidth={2} style={{ alignItems: 'center', padding: 10 }}/> });
         
@@ -82,7 +82,13 @@ class Authorization extends Component {
                     });
                 }
             })
-            .catch((err) => this.setState(err))
+            .catch((err) => {
+                if (err.badCredentials) {
+                this.setState({ messageError: <Text style={ styles.buttonText }>Bad credentials</Text> });
+            }
+            else {
+                this.setState({ messageError: <Text style={ styles.buttonText }>Some other error</Text> });
+            }})
             .finally(() => {
                     this.setState({ progressBar: null });
                 }

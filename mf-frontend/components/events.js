@@ -16,7 +16,7 @@ import React, {
     TouchableHighlight
 } from 'react-native';
 
-var EventsService = require('./services/eventsService');
+var EventsService = require('./../services/eventsService');
 var eventsService = new EventsService();
 
 var Events = React.createClass({
