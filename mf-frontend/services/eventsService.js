@@ -15,21 +15,6 @@ class EventsService extends ServiceBase {
                     responseCallback(jsonData.events);
                 });
             }).catch(this.handleError);
-        /*this._userService.isUserAuthorized()
-            .then((authorized) => {
-                if (authorized) {
-                    fetch(`${serverApiBaseUrl}users/nearestEvents?userId=${this._currentUser.id}`).
-                        json().
-                        then(data => {
-                            responseCallback(data);
-                        }).catch(handleError);
-                } else {
-                    responseCallback([]);
-                }
-            })
-            .catch((error) => {
-                handleError(error);
-            });*/
     }
 }
 
