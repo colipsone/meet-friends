@@ -8,23 +8,23 @@ class UserService extends ServiceBase {
         super();
         if (!instance) {
             instance = this;
-            this._currentUser = {
+            instance._currentUser = {
                 id: '570154078f581b5437f24dd5',
                 isAuthorized: false,
-                name: ''
+                accesToken: ''
             };
         }
         return instance;
     }
 
     get currentUser() {
-        return this._currentUser;
+        return instance._currentUser;
     }
 
     /*isUserAuthorized() {
         return new Promise((resolve, reject) => {
             if (!this._currentUser.isAuthorized) {
-                authorize().then(() => {
+                login().then(() => {
                     resolve(true);
                 }).catch((error) => {
                     reject(error);
@@ -35,13 +35,59 @@ class UserService extends ServiceBase {
         });
     }*/
 
-    authorize() {
-        return Promise((resolve, reject) => {
-            //TODO: Add logic to authorize user
-            this._currentUser = {
-                isAuthorized: true
-            };
-            resolve(true);
+    login(email, password) {
+        return new Promise((resolve, reject) => {
+            fetch(`${instance.serverApiBaseUrl}/users/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        password: password
+                    })
+                })
+                .then(response => {
+                    response.json().then((jsonData) => {
+                        if (!jsonData.error) {
+                            instance._currentUser.id = jsonData.userId;
+                            instance._currentUser.accesToken = jsonData.id;
+                            instance._currentUser.isAuthorized = true;
+                            resolve(true);
+                        } else {
+                            instance._currentUser.isAuthorized = false;
+                            reject(jsonData.error.message);
+                        }
+                    });
+                });
+        });
+    }
+
+    logout() {
+        return new Promise((resolve, reject) => {
+            fetch(`${instance.serverApiBaseUrl}/users/logout`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    access_token: instance._currentUser.accesToken
+                })
+            })
+                .then(response => {
+                    response.json().then((jsonData) => {
+                        if (!jsonData.error) {
+                            instance._currentUser.id = '';
+                            instance._currentUser.accesToken = '';
+                            instance._currentUser.isAuthorized = false;
+                            resolve(true);
+                        } else {
+                            reject(jsonData.error.message);
+                        }
+                    });
+                });
         });
     }
 

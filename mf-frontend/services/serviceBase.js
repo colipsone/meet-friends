@@ -7,7 +7,6 @@ class ServiceBase {
     }
 
     get serverApiBaseUrl() {
-        console.log('base api');
         return this._serverApiBaseUrl;
     }
     
