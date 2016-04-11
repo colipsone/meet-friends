@@ -21,20 +21,6 @@ class UserService extends ServiceBase {
         return instance._currentUser;
     }
 
-    /*isUserAuthorized() {
-        return new Promise((resolve, reject) => {
-            if (!this._currentUser.isAuthorized) {
-                login().then(() => {
-                    resolve(true);
-                }).catch((error) => {
-                    reject(error);
-                });
-            } else {
-                resolve(true);
-            }
-        });
-    }*/
-
     login(email, password) {
         return new Promise((resolve, reject) => {
             fetch(`${instance.serverApiBaseUrl}/users/login`, {
@@ -60,6 +46,9 @@ class UserService extends ServiceBase {
                             reject(jsonData.error.message);
                         }
                     });
+                })
+                .catch(error => {
+                    reject(error.message);
                 });
         });
     }
