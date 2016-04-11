@@ -41,7 +41,8 @@ var CreateEvent = React.createClass({
             console.warn(`Error in example '${stateKey}': `, message);
         }
     },
-     render() {
+    save(){console.log('test')},
+    render() {
         return (
                 <View style={styles.container}>
                     <Text style={styles.headerText}>Event Name</Text>
@@ -73,7 +74,7 @@ var CreateEvent = React.createClass({
                         <Text>_GROUP_</Text>
                     </View>
                     <View style={styles.submit}>
-                        <TouchableHighlight style={{height:40, width: 120, alignItems: "center", justifyContent: "center"}}>
+                        <TouchableHighlight onPress={this.save} style={{height:40, width: 120, alignItems: "center", justifyContent: "center"}}>
                             <Text style={styles.datePickerButton}>Create Event</Text>
                         </TouchableHighlight>
                     </View>

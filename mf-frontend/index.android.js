@@ -38,7 +38,7 @@ var NewProject = React.createClass({
      } else if (route.view_id === 2) {
          return <EventDetails navigator={navigator} event_id={route.event_id}/>
      } else if (route.view_id === 3) {
-    return <CreateEvent navigator={navigator}/>
+         return <CreateEvent navigator={navigator}/>
     }
   },
   render : function() {
@@ -51,7 +51,7 @@ var NewProject = React.createClass({
               />
                <Text tabLabel="plus-round" >t</Text>
                <Text tabLabel="man" >t</Text>
-               <Text tabLabel="android-apps" >t</Text>
+               <CreateEvent tabLabel="android-apps"/>
                <CalendarPicker tabLabel="calendar"
                   selectedDate={this.state.date}
                   onDateChange={this.onDateChange}

@@ -63,6 +63,7 @@ class Authorization extends Component {
                     </TouchableHighlight>
 
                     <View>{this.state.progressBar}</View>
+                    <View>{this.state.messageError}</View>
                 </View>
             </View>
         );
@@ -83,12 +84,8 @@ class Authorization extends Component {
                 }
             })
             .catch((err) => {
-                if (err.badCredentials) {
-                this.setState({ messageError: <Text style={ styles.buttonText }>Bad credentials</Text> });
-            }
-            else {
-                this.setState({ messageError: <Text style={ styles.buttonText }>Some other error</Text> });
-            }})
+                this.setState({ messageError: <Text style={ styles.buttonText }>{err}</Text> });
+            })
             .finally(() => {
                     this.setState({ progressBar: null });
                 }
