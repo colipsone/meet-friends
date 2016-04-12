@@ -7,6 +7,10 @@
     "validateUpsert": true
   },
   "properties": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
     "from": {
       "type": "date",
       "required": true
@@ -15,6 +19,9 @@
       "type": "date"
     },
     "description": {
+      "type": "string"
+    },
+    "type": {
       "type": "string"
     }
   },

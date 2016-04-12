@@ -8,11 +8,13 @@ import React, {
     DatePickerAndroid
 } from 'react-native';
 
-var Icon = require('react-native-vector-icons/FontAwesome')
+var Icon = require('react-native-vector-icons/FontAwesome');
+var EventDetailsController = require('./eventDetailsController');
 
 var CreateEvent = React.createClass({
     getInitialState() {
         return {
+            eventCtrl: new EventDetailsController(),
             presetDate: new Date(2020, 4, 5),
             allDate: new Date(2020, 4, 5),
             simpleText: 'pick a date',
@@ -25,44 +27,45 @@ var CreateEvent = React.createClass({
         };
     },
 
-    async showPicker(stateKey, options) {
+    async showPicker(stateKey, setEventDate) {
         try {
-            var newState = {};
+            const options = {
+                date: this.state.minDate,
+                minDate: new Date()
+            };
+            const newState = {};
             const {action, year, month, day} = await DatePickerAndroid.open(options);
             if (action === DatePickerAndroid.dismissedAction) {
                 newState[stateKey + 'Text'] = 'dismissed';
             } else {
-                var date = new Date(year, month, day);
+                const date = new Date(year, month, day);
                 newState[stateKey + 'Text'] = date.toLocaleDateString();
-                newState[stateKey + 'Date'] = date;
+                setEventDate.call(this.state.eventCtrl, date);
             }
             this.setState(newState);
         } catch ( {code, message} ) {
             console.warn(`Error in example '${stateKey}': `, message);
         }
     },
-    save(){console.log('test')},
     render() {
         return (
                 <View style={styles.container}>
-                    <Text style={styles.headerText}>Event Name</Text>
+                    <Text style={styles.headerText}>Title</Text>
                     <View style={styles.input}>
-                        <TextInput onChangeText={(text)=> this.setState({description: text})}></TextInput>
+                        <TextInput onChangeText={(text)=> this.state.eventCtrl.newEvent.title = text}></TextInput>
+                    </View>
+                    <Text style={styles.headerText}>Description</Text>
+                    <View style={styles.input}>
+                        <TextInput onChangeText={(text)=> this.state.eventCtrl.newEvent.description = text}></TextInput>
                     </View>
                     <View style={styles.date}>
-                        <TouchableHighlight style={{height:40, width: 120}} onPress={this.showPicker.bind(this, 'start', {
-                          date: this.state.minDate,
-                          minDate: new Date()
-                        })}>
+                        <TouchableHighlight style={{height:40, width: 120}} onPress={this.showPicker.bind(this, 'start', this.state.eventCtrl.setStartDate)}>
                             <View style={styles.datePickerButton}>
                                 <Icon style={styles.icon} name="rocket" size={15} color="#900" />
                                 <Text style={styles.text}>{this.state.startText}</Text>
                             </View>
                         </TouchableHighlight>
-                        <TouchableHighlight style={{height:40, width: 120}} onPress={this.showPicker.bind(this, 'end', {
-                          date: this.state.minDate,
-                          minDate: new Date()
-                        })}>
+                        <TouchableHighlight style={{height:40, width: 120}} onPress={this.showPicker.bind(this, 'end', this.state.eventCtrl.setEndDate)}>
                             <View style={styles.datePickerButton}>
                                 <Icon style={styles.icon} name="rocket" size={15} color="#900" />
                                 <Text style={styles.text}>{this.state.endText}</Text>
@@ -74,7 +77,7 @@ var CreateEvent = React.createClass({
                         <Text>_GROUP_</Text>
                     </View>
                     <View style={styles.submit}>
-                        <TouchableHighlight onPress={this.save} style={{height:40, width: 120, alignItems: "center", justifyContent: "center"}}>
+                        <TouchableHighlight onPress={this.state.eventCtrl.save.bind(this.state.eventCtrl)} style={{height:40, width: 120, alignItems: "center", justifyContent: "center"}}>
                             <Text style={styles.datePickerButton}>Create Event</Text>
                         </TouchableHighlight>
                     </View>

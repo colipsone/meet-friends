@@ -9,14 +9,14 @@ import React, {
   Navigator
 } from 'react-native';
 
-import Events from './components/events';
-import EventDetails from './components/event_details';
+import Events from './components/events/events';
+import EventDetails from './components/events/event_details';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import FacebookTabBar from './components/FacebookTabBar';
 import Icon from 'react-native-vector-icons/Ionicons';
 import CalendarPicker from 'react-native-calendar-picker';
-import AuthorizationMenu from './components/auth_menu';
-import CreateEvent from './components/create_event';
+import AuthorizationMenu from './components/authorization/auth_menu';
+import CreateEvent from './components/events/create_event';
 
 var NewProject = React.createClass({
 

@@ -70,7 +70,7 @@ class Authorization extends Component {
     }
     onLoginPress() {
         const Progress = require('react-native-progress');
-        const UserService = require('./../services/userService');
+        const UserService = require('./../../services/userService');
         
         this.setState({ progressBar: <Progress.Circle size={30} indeterminate={true} borderWidth={2} style={{ alignItems: 'center', padding: 10 }}/> });
         

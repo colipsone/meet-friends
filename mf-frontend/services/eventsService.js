@@ -8,6 +8,7 @@ class EventsService extends ServiceBase {
         this._userService = new UserService();
         this._currentUser = this._userService.currentUser;
     }
+
     getEvents(responseCallback) {
         fetch(`${this.serverApiBaseUrl}/users/nearestEvents?userId=${this._currentUser.id}`)
             .then(response => {
@@ -15,6 +16,28 @@ class EventsService extends ServiceBase {
                     responseCallback(jsonData.events);
                 });
             }).catch(this.handleError);
+    }
+
+    save(newEvent) {
+        newEvent.userId = this._userService.currentUser.id;
+        return new Promise((resolve, reject) => {
+            fetch(`${this.serverApiBaseUrl}/events/`, {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(newEvent)
+                })
+                .then(response => {
+                    response.json().then((jsonData) => {
+                        resolve(jsonData);
+                    });
+                })
+                .catch(error => {
+                    reject(error);
+                });
+        });
     }
 }
 
