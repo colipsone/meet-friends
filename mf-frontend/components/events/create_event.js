@@ -47,6 +47,12 @@ var CreateEvent = React.createClass({
             console.warn(`Error in example '${stateKey}': `, message);
         }
     },
+    createEvent(){
+        this.state.eventCtrl.save();
+        this.props.navigator.push({
+            view_id: 1
+        });
+    },
     render() {
         return (
                 <View style={styles.container}>
@@ -77,7 +83,7 @@ var CreateEvent = React.createClass({
                         <Text>_GROUP_</Text>
                     </View>
                     <View style={styles.submit}>
-                        <TouchableHighlight onPress={this.state.eventCtrl.save.bind(this.state.eventCtrl)} style={{height:40, width: 120, alignItems: "center", justifyContent: "center"}}>
+                        <TouchableHighlight onPress={this.createEvent} style={{height:40, width: 120, alignItems: "center", justifyContent: "center"}}>
                             <Text style={styles.datePickerButton}>Create Event</Text>
                         </TouchableHighlight>
                     </View>

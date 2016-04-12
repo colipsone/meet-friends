@@ -38,7 +38,9 @@ class Authorization extends Component {
         super(props);
 
         this.state = {
-            showProgress : false
+            showProgress : false,
+            email : 'xim@rambler.ru',
+            password : 'xim'
         }
     }
 
@@ -52,12 +54,12 @@ class Authorization extends Component {
                     <TextInput
                         onChangeText={(text) => this.setState({ username: text })}
                         style={styles.input}
-                        placeholder="Login">{}</TextInput>
+                        placeholder="Login">{this.state.email}</TextInput>
                     <TextInput
                         onChangeText={(text) => this.setState({ password: text })}
                         style={styles.input}
                         placeholder="Password"
-                        secureTextEntry={true}>{}</TextInput>
+                        secureTextEntry={true}>{this.state.password}</TextInput>
                     <TouchableHighlight style={styles.button} onPress={this.onLoginPress.bind(this)}>
                         <Text style={ styles.buttonText }>Log In</Text>
                     </TouchableHighlight>

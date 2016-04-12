@@ -34,30 +34,27 @@ var NewProject = React.createClass({
      if (route.view_id === 0) {
          return <AuthorizationMenu navigator={navigator}/>
      } else if (route.view_id === 1) {
-         return <Events navigator={navigator}/>
+         return <ScrollableTabView tabBarPosition={"bottom"} renderTabBar={() => <FacebookTabBar someProp={'here'} />}>
+                    <Events tabLabel="android-alert" navigator={navigator}/>
+                    <Text tabLabel="plus-round" >t</Text>
+                    <CreateEvent tabLabel="plus" navigator={navigator}/>
+                    <Text tabLabel="man" >t</Text>
+                    <CalendarPicker tabLabel="calendar"
+                                     selectedDate={this.state.date}
+                                     onDateChange={this.onDateChange}
+                                     eventDays={this.state.eventArray}
+                    />
+            </ScrollableTabView>
      } else if (route.view_id === 2) {
          return <EventDetails navigator={navigator} event_id={route.event_id}/>
-     } else if (route.view_id === 3) {
-         return <CreateEvent navigator={navigator}/>
-    }
+     }
   },
   render : function() {
       return (
-
-           <ScrollableTabView tabBarPosition={"bottom"} renderTabBar={() => <FacebookTabBar someProp={'here'} />}>
               <Navigator tabLabel="bag"
                   initialRoute={{ view_id: 0 }}
                   renderScene={this._renderScene}
               />
-               <Text tabLabel="plus-round" >t</Text>
-               <Text tabLabel="man" >t</Text>
-               <CreateEvent tabLabel="android-apps"/>
-               <CalendarPicker tabLabel="calendar"
-                  selectedDate={this.state.date}
-                  onDateChange={this.onDateChange}
-                  eventDays={this.state.eventArray}
-              />
-           </ScrollableTabView>
       )
     }
 });
