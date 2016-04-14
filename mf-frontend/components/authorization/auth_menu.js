@@ -14,24 +14,35 @@ import React, {
 
 const styles = StyleSheet.create({
     button : {
-        backgroundColor: '#e9eaed',
+        backgroundColor: "#6ABCE4",
         height: 50,
         alignSelf: 'stretch',
         justifyContent : 'center',
-        marginTop: 10
+        marginTop: 10,
+        borderRadius : 5,
+        alignItems: "center",
     },
     buttonText: {
         fontSize: 20,
-        alignSelf: 'center'
+        alignSelf: 'center',
+        color: "white"
+    },
+    messageError:{
+        fontSize: 16,
+        alignSelf: 'center',
+        color: "red",
+        marginTop: 5
     },
     heading : {
-        fontSize : 30
+        fontSize : 30,
+        fontStyle : 'italic'
     },
     input : {
         height: 50,
         marginTop: 1
     }
 });
+
 
 class Authorization extends Component {
   constructor(props) {
@@ -63,9 +74,8 @@ class Authorization extends Component {
                     <TouchableHighlight style={styles.button} onPress={this.onLoginPress.bind(this)}>
                         <Text style={ styles.buttonText }>Log In</Text>
                     </TouchableHighlight>
-
-                    <View>{this.state.progressBar}</View>
                     <View>{this.state.messageError}</View>
+                    <View>{this.state.progressBar}</View>
                 </View>
             </View>
         );
@@ -86,7 +96,7 @@ class Authorization extends Component {
                 }
             })
             .catch((err) => {
-                this.setState({ messageError: <Text style={ styles.buttonText }>{err}</Text> });
+                this.setState({ messageError: <Text style={ styles.messageError }>{err}</Text> });
             })
             .finally(() => {
                     this.setState({ progressBar: null });

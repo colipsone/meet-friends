@@ -53,6 +53,13 @@ class Events extends Component {
         this.fetchData();
     }
 
+    localDate() {
+        //console.log(this.props.event.from);
+        //var ms = Date.parse(this.props.event.from);
+        //return new Date(ms).toLocaleString();
+        return 1;
+    }
+
     render() {
         if (!this.state.loaded) {
             return this.renderLoadingView();
@@ -96,7 +103,7 @@ class Events extends Component {
                 })}}>
                 <View style={styles.container}>
                     <Image
-                source={{uri: eventsService.serverApiBaseUrl + event.photoUrl}}
+                        source={{uri: eventsService.serverApiBaseUrl + event.photoUrl}}
                         style={styles.thumbnail}
                     />
                     <View style={styles.leftContainer}>
@@ -159,7 +166,8 @@ const styles = StyleSheet.create({
     thumbnail: {
         width: 50,
         height: 50,
-        borderRadius: 30
+        borderRadius: 30,
+        marginLeft: 10
     },
     leftContainer: {
         flex: 4
@@ -224,7 +232,7 @@ const styles = StyleSheet.create({
         marginLeft : 20,
         marginBottom : 10,
         marginRight : 20,
-        height:30,
+        height: 30,
         flexDirection: 'row',
     },
     button_right : {
@@ -250,7 +258,7 @@ const styles = StyleSheet.create({
     },
     scrollView : {
         flex : 1,
-        backgroundColor: '#0aa494',
+        backgroundColor: '#6ABCE4',
     }
 
 });

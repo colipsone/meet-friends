@@ -57,23 +57,23 @@ var CreateEvent = React.createClass({
         return (
                 <View style={styles.container}>
                     <Text style={styles.headerText}>Title</Text>
-                    <View style={styles.input}>
+                    <View>
                         <TextInput onChangeText={(text)=> this.state.eventCtrl.newEvent.title = text}></TextInput>
                     </View>
                     <Text style={styles.headerText}>Description</Text>
-                    <View style={styles.input}>
-                        <TextInput onChangeText={(text)=> this.state.eventCtrl.newEvent.description = text}></TextInput>
+                    <View>
+                        <TextInput multiline={true} onChangeText={(text)=> this.state.eventCtrl.newEvent.description = text}></TextInput>
                     </View>
-                    <View style={styles.date}>
+                    <View style={styles.dateContainer}>
                         <TouchableHighlight style={{height:40, width: 120}} onPress={this.showPicker.bind(this, 'start', this.state.eventCtrl.setStartDate)}>
                             <View style={styles.datePickerButton}>
-                                <Icon style={styles.icon} name="rocket" size={15} color="#900" />
+                                <Icon style={styles.icon} name="clock-o" size={15} color="#900" />
                                 <Text style={styles.text}>{this.state.startText}</Text>
                             </View>
                         </TouchableHighlight>
                         <TouchableHighlight style={{height:40, width: 120}} onPress={this.showPicker.bind(this, 'end', this.state.eventCtrl.setEndDate)}>
                             <View style={styles.datePickerButton}>
-                                <Icon style={styles.icon} name="rocket" size={15} color="#900" />
+                                <Icon style={styles.icon} name="clock-o" size={15} color="#900" />
                                 <Text style={styles.text}>{this.state.endText}</Text>
                             </View>
                         </TouchableHighlight>
@@ -83,8 +83,10 @@ var CreateEvent = React.createClass({
                         <Text>_GROUP_</Text>
                     </View>
                     <View style={styles.submit}>
-                        <TouchableHighlight onPress={this.createEvent} style={{height:40, width: 120, alignItems: "center", justifyContent: "center"}}>
-                            <Text style={styles.datePickerButton}>Create Event</Text>
+                        <TouchableHighlight style={{height:40, width: 180}} onPress={this.createEvent}>
+                            <View style={styles.createButton}>
+                                <Text style={styles.saveText}>Create Event</Text>
+                            </View>
                         </TouchableHighlight>
                     </View>
                 </View>
@@ -95,20 +97,18 @@ var CreateEvent = React.createClass({
 var styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#ffffff',
+        backgroundColor: '#FFFFFF',
         paddingLeft : 40,
         paddingTop : 40,
         paddingRight: 40
     },
-    input: {
-        borderWidth : 1,
-        borderColor: "#48bbec"
-    },
     headerText: {
         textAlign : "center",
-        padding : 5
+        marginTop : 20,
+        fontSize : 18,
+        fontWeight : 'bold'
     },
-    date: {
+    dateContainer: {
         flex: 1,
         flexDirection: 'row',
         justifyContent:'space-between',
@@ -117,18 +117,20 @@ var styles = StyleSheet.create({
     datePickerButton: {
         flex: 1,
         flexDirection: 'row',
-        backgroundColor:"#e4e4e4",
+        backgroundColor:"#6ABCE4",
         padding: 2,
         alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "center",
+        borderRadius : 5
     },
     icon: {
         marginTop: 2,
-        marginLeft: 2,
+        marginLeft: 2
     },
     text: {
-        margin: 2,
-        fontSize: 16
+        marginLeft: 10,
+        fontSize: 16,
+        color: "white"
     },
     group: {
         flex: 1,
@@ -137,6 +139,17 @@ var styles = StyleSheet.create({
     submit: {
         flex:1,
         alignItems: 'center'
+    },
+    createButton: {
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor:"#6ABCE4",
+        borderRadius : 5
+    },
+    saveText: {
+        fontSize: 16,
+        color: "white",
     }
 });
 
