@@ -13,32 +13,46 @@ import React, {
     ProgressBarAndroid,
     ListView,
     ScrollView,
-    TouchableHighlight
+    TouchableHighlight,
+    RefreshControl
 } from 'react-native';
 
 var EventsService = require('./../../services/eventsService');
 var eventsService = new EventsService();
 
-var Events = React.createClass({
-    getInitialState: function() {
-        return {
+class Events extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
             dataSource: new ListView.DataSource({
                 rowHasChanged: (row1, row2) => row1 !== row2
             }),
-            loaded : false
-        }
-    },
-    fetchData: function() {
+            loaded : false,
+            refreshing: false
+        };
+    }
+
+    _onRefresh() {
+        console.log('test');
+        this.setState({refreshing: true});
+        this.fetchData();
+        console.log(this.state.refreshing)
+    }
+
+    fetchData() {
         eventsService.getEvents((events) => {
             this.setState({
                 dataSource: this.state.dataSource.cloneWithRows(events),
-                loaded : true
+                loaded : true,
+                refreshing : false
             });
         });
-    },
-    componentDidMount: function() {
+    }
+
+    componentDidMount() {
         this.fetchData();
-    },
+    }
+
     render() {
         if (!this.state.loaded) {
             return this.renderLoadingView();
@@ -54,7 +68,14 @@ var Events = React.createClass({
                         <Text style={styles.button_text_right}>Calendar</Text>
                     </TouchableHighlight>
                 </View>
-                <ScrollView style={styles.scrollViewTop}>
+                <ScrollView
+                    style={styles.scrollViewTop}
+                    refreshControl={
+                            <RefreshControl
+                              refreshing={this.state.refreshing}
+                              onRefresh={this._onRefresh.bind(this)}
+                            />
+                    }>
                     <Text style={styles.eventTitle}>Nearest Events</Text>
                     <ListView
                         dataSource={this.state.dataSource}
@@ -65,7 +86,7 @@ var Events = React.createClass({
             </View>
         )
 
-    },
+    }
     renderEventList(event) {
         return (
             <TouchableHighlight
@@ -110,7 +131,7 @@ var Events = React.createClass({
                 </View>
             </TouchableHighlight>
         )
-    },
+    }
     renderLoadingView() {
         return(
             <View style={styles.container}>
@@ -120,7 +141,7 @@ var Events = React.createClass({
             </View>
         )
     }
-});
+};
 
 const styles = StyleSheet.create({
     container: {
