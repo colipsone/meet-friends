@@ -56,6 +56,11 @@ class Authorization extends Component {
         }
     }
 
+    capitalize(s)
+    {
+        return s[0].toUpperCase() + s.slice(1);
+    }    
+
     render() {
         return (
             <View style={{ flex:1, padding: 30 }}>
@@ -97,7 +102,7 @@ class Authorization extends Component {
                 }
             })
             .catch((err) => {
-                this.setState({ messageError: <Text style={ styles.messageError }>{err}</Text> });
+                this.setState({ messageError: <Text style={ styles.messageError }>{this.capitalize(err)}</Text> });
             })
             .finally(() => {
                     this.setState({ progressBar: null });

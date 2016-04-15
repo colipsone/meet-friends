@@ -21,6 +21,7 @@ var EventsService = require('./../../services/eventsService');
 var eventsService = new EventsService();
 
 class Events extends Component {
+    
     constructor(props) {
         super(props);
         this.state = {
@@ -30,13 +31,13 @@ class Events extends Component {
             loaded : false,
             refreshing: false
         };
+        //this.fetchData();
+        console.log(this);
     }
 
     _onRefresh() {
-        console.log('test');
         this.setState({refreshing: true});
         this.fetchData();
-        console.log(this.state.refreshing)
     }
 
     fetchData() {
@@ -47,6 +48,7 @@ class Events extends Component {
                 refreshing : false
             });
         });
+        console.log(this);
     }
 
     componentDidMount() {
@@ -57,6 +59,7 @@ class Events extends Component {
         //console.log(this.props.event.from);
         //var ms = Date.parse(this.props.event.from);
         //return new Date(ms).toLocaleString();
+        console.log('test');
         return 1;
     }
 
@@ -79,8 +82,8 @@ class Events extends Component {
                     style={styles.scrollViewTop}
                     refreshControl={
                             <RefreshControl
-                              refreshing={this.state.refreshing}
-                              onRefresh={this._onRefresh.bind(this)}
+                                refreshing={this.state.refreshing}
+                                onRefresh={this._onRefresh.bind(this)}
                             />
                     }>
                     <Text style={styles.eventTitle}>Nearest Events</Text>
@@ -92,15 +95,18 @@ class Events extends Component {
                 </ScrollView>
             </View>
         )
-
     }
+
     renderEventList(event) {
         return (
             <TouchableHighlight
-                onPress={() => {this.props.navigator.push({
-                    event_id : event.event_id,
-                    view_id : 2
-                })}}>
+                onPress={() => {
+                    console.log(event);
+                //     this.props.navigator.push({
+                //     event_id : event.event_id,
+                //     view_id : 2
+                // })
+                }}>
                 <View style={styles.container}>
                     <Image
                         source={{uri: eventsService.serverApiBaseUrl + event.photoUrl}}
@@ -126,7 +132,7 @@ class Events extends Component {
                         </Text>
                         <View style={styles.iconRow}>
                             <Image
-                        source={{uri: "http://icons.iconarchive.com/icons/elegantthemes/beautiful-flat/128/selftimer-icon.png"}}
+                                source={{uri: "http://icons.iconarchive.com/icons/elegantthemes/beautiful-flat/128/selftimer-icon.png"}}
                                 style={styles.icon}
                             />
                             <Image
@@ -139,6 +145,7 @@ class Events extends Component {
             </TouchableHighlight>
         )
     }
+
     renderLoadingView() {
         return(
             <View style={styles.container}>
@@ -241,12 +248,15 @@ const styles = StyleSheet.create({
         elevation: 3
     },
     topContainer : {
-        marginTop: 10,
-        marginLeft : 20,
-        marginBottom : 10,
-        marginRight : 20,
-        height: 30,
+        paddingTop: 10,
+        paddingLeft : 20,
+        paddingBottom : 10,
+        paddingRight : 20,
+
+        height: 50,
         flexDirection: 'row',
+        backgroundColor: '#6ABCE4',
+
     },
     button_right : {
         backgroundColor: '#f7f7f7',
