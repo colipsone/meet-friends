@@ -126,11 +126,11 @@ class Events extends Component {
                         </Text>
                         <View style={styles.iconRow}>
                             <Image
-                        source={{uri: eventsService.serverApiBaseUrl + event.photoUrl}}
+                        source={{uri: "http://icons.iconarchive.com/icons/elegantthemes/beautiful-flat/128/selftimer-icon.png"}}
                                 style={styles.icon}
                             />
                             <Image
-                                source={{uri: eventsService.serverApiBaseUrl + event.photoUrl}}
+                                source={{uri: "http://icons.iconarchive.com/icons/elegantthemes/beautiful-flat/128/running-icon.png"}}
                                 style={styles.icon}
                             />
                         </View>
@@ -158,7 +158,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#F5FCFF',
         borderWidth: 1,
-        borderColor: '#d4d4d4'
+        borderRadius: 2,
+        borderColor: '#cdcb9e',
+        marginLeft: 10,
+        marginRight: 10,
+        marginTop: 4,
+        elevation: 10
     },
     spinner: {
         opacity: 1
@@ -167,7 +172,9 @@ const styles = StyleSheet.create({
         width: 50,
         height: 50,
         borderRadius: 30,
-        marginLeft: 10
+        marginLeft: 10,
+        borderColor: '#b8b7aa',
+        borderWidth: 1  ,
     },
     leftContainer: {
         flex: 4
@@ -211,6 +218,8 @@ const styles = StyleSheet.create({
         width: 15,
         height: 15,
         borderRadius: 30,
+        borderColor: '#e4e3be',
+        borderWidth: 1.6,
         marginTop: 10,
         marginLeft: 10
     },
@@ -224,8 +233,12 @@ const styles = StyleSheet.create({
     eventTitle : {
         backgroundColor: '#f1f1f1',
         textAlign : 'center',
+        fontFamily : 'Noto',
         fontSize: 30,
-        color: "#464646"
+        fontStyle: 'italic',
+        color: "#464646",
+        fontWeight: 'bold',
+        elevation: 3
     },
     topContainer : {
         marginTop: 10,
@@ -240,12 +253,14 @@ const styles = StyleSheet.create({
         flex: 1,
         borderRadius: 4,
         paddingTop: 5,
+        elevation: 3
     },
     button_left : {
         backgroundColor: '#0aa494',
         flex: 1,
         borderRadius: 4,
         paddingTop: 5,
+        elevation: 3,
     },
     button_text_left : {
         textAlign : 'center',

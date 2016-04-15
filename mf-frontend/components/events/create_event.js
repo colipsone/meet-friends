@@ -81,6 +81,7 @@ var CreateEvent = React.createClass({
                     <View style={styles.group}>
                         <Text>Select Group</Text>
                         <Text>_GROUP_</Text>
+                        <Text>Party Type</Text>
                     </View>
                     <View style={styles.submit}>
                         <TouchableHighlight style={{height:40, width: 180}} onPress={this.createEvent}>
@@ -118,10 +119,11 @@ var styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         backgroundColor:"#6ABCE4",
-        padding: 2,
+        margin: 2,
         alignItems: "center",
         justifyContent: "center",
-        borderRadius : 5
+        borderRadius : 5,
+        elevation: 2
     },
     icon: {
         marginTop: 2,
@@ -145,11 +147,14 @@ var styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         backgroundColor:"#6ABCE4",
-        borderRadius : 5
+        margin : 2,
+        borderRadius : 5,
+        elevation: 3
     },
     saveText: {
         fontSize: 16,
         color: "white",
+        elevation: 1
     }
 });
 
