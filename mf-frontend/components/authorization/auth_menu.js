@@ -13,20 +13,15 @@ import React, {
 /*eslint-enable no-unused-vars*/
 
 const styles = StyleSheet.create({
-    button : {
-        backgroundColor: "#6ABCE4",
-        height: 50,
+    LogInButton : {
+        backgroundColor: "#42A5F5",
+        height: 45,
         alignSelf: 'stretch',
         justifyContent : 'center',
-        marginTop: 10,
+        marginTop: 30,
         borderRadius : 5,
         alignItems: "center",
         elevation: 2
-    },
-    buttonText: {
-        fontSize: 20,
-        alignSelf: 'center',
-        color: "white"
     },
     messageError:{
         fontSize: 16,
@@ -34,14 +29,37 @@ const styles = StyleSheet.create({
         color: "red",
         marginTop: 5
     },
-    heading : {
-        fontSize : 30,
-        fontStyle : 'italic'
-    },
     input : {
         height: 50,
-        marginTop: 1
-    }
+        marginTop: 5
+    },
+    body : {
+        flex:8, 
+        padding: 30, 
+        backgroundColor:'#E3F2FD',
+    },
+    header : {
+        flex:1, 
+        alignItems:'center', 
+        justifyContent:'center',
+        backgroundColor: '#2196F3',
+        elevation: 4
+    },
+    headerText : {
+        fontSize : 20,
+        color: 'white',
+    },
+    inputFields : {
+        backgroundColor: 'white',
+        padding: 10,
+        elevation: 1,
+        borderRadius : 1,
+    },
+    buttonText: {
+        fontSize: 20,
+        alignSelf: 'center',
+        color: "white"
+    },
 });
 
 
@@ -63,22 +81,24 @@ class Authorization extends Component {
 
     render() {
         return (
-            <View style={{ flex:1, padding: 30 }}>
-                <View style={{ flex:2, alignItems:'center', justifyContent:'center' }}>
-                    <Text style={styles.heading}>Authorization Menu</Text>
-                </View>
-                <View style={{ flex:5 }}>
-                    <TextInput
-                        onChangeText={(text) => this.setState({ username: text })}
-                        style={styles.input}
-                        placeholder="Login">{this.state.email}</TextInput>
-                    <TextInput
-                        onChangeText={(text) => this.setState({ password: text })}
-                        style={styles.input}
-                        placeholder="Password"
-                        secureTextEntry={true}>{this.state.password}</TextInput>
-                    <TouchableHighlight style={styles.button} onPress={this.onLoginPress.bind(this)}>
-                        <Text style={ styles.buttonText }>Log In</Text>
+            <View style={{flex: 1}}>
+                <View style={styles.header}>
+                        <Text style={styles.headerText}>Authorization Menu</Text>
+                    </View>
+                <View style={styles.body}>
+                    <View style={styles.inputFields}>
+                        <TextInput
+                            onChangeText={(text) => this.setState({ username: text })}
+                            style={styles.input}
+                            placeholder="Login">{this.state.email}</TextInput>
+                        <TextInput
+                            onChangeText={(text) => this.setState({ password: text })}
+                            style={styles.input}
+                            placeholder="Password"
+                            secureTextEntry={true}>{this.state.password}</TextInput>
+                    </View>
+                    <TouchableHighlight style={styles.LogInButton} onPress={this.onLoginPress.bind(this)}>
+                        <Text style={styles.buttonText}>Log In</Text>
                     </TouchableHighlight>
                     <View>{this.state.messageError}</View>
                     <View>{this.state.progressBar}</View>
