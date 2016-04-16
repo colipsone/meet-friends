@@ -7,7 +7,8 @@ import React, {
     TextInput,
     TouchableHighlight,
     StyleSheet,
-    Component
+    Component,
+    Image
 } from 'react-native';
 
 /*eslint-enable no-unused-vars*/
@@ -15,13 +16,15 @@ import React, {
 const styles = StyleSheet.create({
     LogInButton : {
         backgroundColor: "#42A5F5",
-        height: 45,
+        height: 40,
         alignSelf: 'stretch',
         justifyContent : 'center',
         marginTop: 30,
         borderRadius : 5,
         alignItems: "center",
-        elevation: 2
+        elevation: 2,
+        marginLeft:40,
+        marginRight:40
     },
     messageError:{
         fontSize: 16,
@@ -56,10 +59,34 @@ const styles = StyleSheet.create({
         borderRadius : 1,
     },
     buttonText: {
-        fontSize: 20,
+        fontSize: 14,
         alignSelf: 'center',
         color: "white"
     },
+    GoogleButtonText: {
+        fontSize: 14,
+        color: "black",
+    },
+    SingInGoogleButton: {
+        height: 40,
+        backgroundColor: "#FFFFFF",
+        marginTop: 30,
+        borderRadius : 5,
+        elevation: 2,
+        marginLeft:40,
+        marginRight:40
+    },
+    GoogleIcon: {
+        height: 18,
+        width: 18,
+        marginLeft: 8,
+        marginRight: 24
+    },
+    SingInGoogleButtonView: {
+        flex:1, 
+        flexDirection: 'row',
+        alignItems: "center"
+    }
 });
 
 
@@ -98,7 +125,15 @@ class Authorization extends Component {
                             secureTextEntry={true}>{this.state.password}</TextInput>
                     </View>
                     <TouchableHighlight style={styles.LogInButton} onPress={this.onLoginPress.bind(this)}>
-                        <Text style={styles.buttonText}>Log In</Text>
+                        <Text style={styles.buttonText}>LOG IN</Text>
+                    </TouchableHighlight>
+                    <TouchableHighlight style={styles.SingInGoogleButton} onPress={this.onLoginPress.bind(this)}>
+                        <View style={styles.SingInGoogleButtonView}>
+                            <Image style={styles.GoogleIcon} 
+                               source={{uri: 'https://developers.google.com/identity/images/g-logo.png'}}
+                            />
+                            <Text style={styles.GoogleButtonText}>SING IN WITH GOOGLE</Text>
+                        </View>
                     </TouchableHighlight>
                     <View>{this.state.messageError}</View>
                     <View>{this.state.progressBar}</View>
