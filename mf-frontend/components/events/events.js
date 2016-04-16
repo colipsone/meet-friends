@@ -20,48 +20,62 @@ import React, {
 var EventsService = require('./../../services/eventsService');
 var eventsService = new EventsService();
 
-class Events extends Component {
+var Events = React.createClass({
+//class Events extends Component {
     
-    constructor(props) {
-        super(props);
-        this.state = {
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //         dataSource: new ListView.DataSource({
+    //             rowHasChanged: (row1, row2) => row1 !== row2
+    //         }),
+    //         loaded : false,
+    //         refreshing: false
+    //     };
+    //     //this.fetchData();
+    //     console.log(this);
+    // }
+
+    getInitialState() {
+        return { 
             dataSource: new ListView.DataSource({
                 rowHasChanged: (row1, row2) => row1 !== row2
             }),
             loaded : false,
             refreshing: false
-        };
-        //this.fetchData();
-        console.log(this);
-    }
+        }
+    },
 
     _onRefresh() {
         this.setState({refreshing: true});
         this.fetchData();
-    }
+    },
 
     fetchData() {
         eventsService.getEvents((events) => {
+            events = events.map(function(event) {
+                event.date = '1';
+                return event;
+            });
             this.setState({
                 dataSource: this.state.dataSource.cloneWithRows(events),
                 loaded : true,
                 refreshing : false
             });
         });
-        console.log(this);
-    }
+    },
 
     componentDidMount() {
         this.fetchData();
-    }
+    },
 
     localDate() {
-        //console.log(this.props.event.from);
-        //var ms = Date.parse(this.props.event.from);
-        //return new Date(ms).toLocaleString();
-        console.log('test');
-        return 1;
-    }
+        console.log(this.props.event.from);
+        var ms = Date.parse(this.props.event.from);
+        return new Date(ms).toLocaleString();
+        //console.log('test');
+        //return 1;
+    },
 
     render() {
         if (!this.state.loaded) {
@@ -95,17 +109,17 @@ class Events extends Component {
                 </ScrollView>
             </View>
         )
-    }
+    },
 
     renderEventList(event) {
         return (
             <TouchableHighlight
                 onPress={() => {
-                    console.log(event);
-                //     this.props.navigator.push({
-                //     event_id : event.event_id,
-                //     view_id : 2
-                // })
+                   // console.log(this);
+                    this.props.navigator.push({
+                    event_id : event.event_id,
+                    view_id : 2
+                })
                 }}>
                 <View style={styles.container}>
                     <Image
@@ -144,7 +158,7 @@ class Events extends Component {
                 </View>
             </TouchableHighlight>
         )
-    }
+    },
 
     renderLoadingView() {
         return(
@@ -155,7 +169,7 @@ class Events extends Component {
             </View>
         )
     }
-};
+});
 
 const styles = StyleSheet.create({
     container: {
