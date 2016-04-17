@@ -33,8 +33,8 @@ const styles = StyleSheet.create({
         marginTop: 5
     },
     input : {
-        height: 50,
-        marginTop: 5
+        height: 40,
+        //marginTop: 5,
     },
     body : {
         flex:8, 
@@ -57,6 +57,11 @@ const styles = StyleSheet.create({
         padding: 10,
         elevation: 1,
         borderRadius : 1,
+    },
+    loginText: {
+        fontSize: 9,
+        marginLeft : 4,
+        color: '#FA1378'
     },
     buttonText: {
         fontSize: 14,
@@ -114,19 +119,26 @@ class Authorization extends Component {
                     </View>
                 <View style={styles.body}>
                     <View style={styles.inputFields}>
-                        <TextInput
-                            onChangeText={(text) => this.setState({ username: text })}
-                            style={styles.input}
-                            placeholder="Login">{this.state.email}</TextInput>
-                        <TextInput
-                            onChangeText={(text) => this.setState({ password: text })}
-                            style={styles.input}
-                            placeholder="Password"
-                            secureTextEntry={true}>{this.state.password}</TextInput>
+                        <View>
+                            <Text style={styles.loginText}>Login</Text>
+                            <TextInput
+                                onChangeText={(text) => this.setState({ username: text })}
+                                style={styles.input}
+                                placeholder="Login">{this.state.email}</TextInput>
+                        </View>
+                        <View style={{marginTop: 20}}>
+                            <Text style={styles.loginText}>Password</Text>
+                            <TextInput
+                                onChangeText={(text) => this.setState({ password: text })}
+                                style={styles.input}
+                                placeholder="Password"
+                                secureTextEntry={true}>{this.state.password}</TextInput>
+                        </View>
                     </View>
                     <TouchableHighlight style={styles.LogInButton} onPress={this.onLoginPress.bind(this)}>
                         <Text style={styles.buttonText}>LOG IN</Text>
                     </TouchableHighlight>
+                    <View>{this.state.messageError}</View>
                     <TouchableHighlight style={styles.SingInGoogleButton} onPress={this.onLoginPress.bind(this)}>
                         <View style={styles.SingInGoogleButtonView}>
                             <Image style={styles.GoogleIcon} 
@@ -135,8 +147,8 @@ class Authorization extends Component {
                             <Text style={styles.GoogleButtonText}>SING IN WITH GOOGLE</Text>
                         </View>
                     </TouchableHighlight>
-                    <View>{this.state.messageError}</View>
-                    <View>{this.state.progressBar}</View>
+                    <View>{this.state.progressBar}</View> 
+
                 </View>
             </View>
         );

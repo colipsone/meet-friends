@@ -267,7 +267,9 @@ const styles = StyleSheet.create({
         fontFamily : 'Noto',
         fontSize: 16,
         color: "white",
-        elevation: 3
+        elevation: 2,
+        marginTop: 2,
+        marginBottom: 2
     },
     button_right : {
         backgroundColor: '#42A5F5',
