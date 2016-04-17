@@ -17,7 +17,8 @@ var styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        paddingBottom: 10
+        paddingBottom: 10,
+        //backgroundColor: '#E3F2FD'
     },
     tabs: {
         height: 45,
@@ -27,7 +28,9 @@ var styles = StyleSheet.create({
         borderTopWidth: 0,
         borderLeftWidth: 0,
         borderRightWidth: 0,
-        borderBottomColor: 'rgba(0,0,0,0.05)'
+        backgroundColor: '#1976D2',
+        //marginTop: 5,
+        //borderBottomColor: 'rgba(0,0,0,0.05)',
     },
     icon: {
         position: 'absolute',
@@ -51,9 +54,9 @@ var FacebookTabBar = React.createClass({
 
         return (
             <TouchableOpacity key={name} onPress={() => this.props.goToPage(page)} style={styles.tab}>
-                <Icon name={name} size={30} color='#3B5998' style={styles.icon}
+                <Icon name={name} size={30} color='pink' style={styles.icon}
                       ref={(icon) => { this.selectedTabIcons[page] = icon }} />
-                <Icon name={name} size={30} color='#ccc' style={styles.icon}
+                <Icon name={name} size={30} color='white' style={styles.icon}
                       ref={(icon) => { this.unselectedTabIcons[page] = icon }}/>
             </TouchableOpacity>
         );
@@ -91,7 +94,7 @@ var FacebookTabBar = React.createClass({
             position: 'absolute',
             width: containerWidth / numberOfTabs,
             height: 3,
-            backgroundColor: '#3b5998',
+            backgroundColor: 'pink',
             bottom: 0,
         };
 

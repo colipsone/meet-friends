@@ -54,7 +54,6 @@ var Events = React.createClass({
     fetchData() {
         eventsService.getEvents((events) => {
             events = events.map(function(event) {
-                event.date = '1';
                 return event;
             });
             this.setState({
@@ -84,7 +83,7 @@ var Events = React.createClass({
 
         return (
             <View style={styles.scrollView}>
-                <View style={styles.topContainer} >
+                <View style={styles.header} >
                     <TouchableHighlight style={styles.button_left}>
                         <Text style={styles.button_text_left}>Event List</Text>
                     </TouchableHighlight>
@@ -93,11 +92,10 @@ var Events = React.createClass({
                     </TouchableHighlight>
                 </View>
                 <ScrollView
-                    style={styles.scrollViewTop}
                     refreshControl={
                             <RefreshControl
                                 refreshing={this.state.refreshing}
-                                onRefresh={this._onRefresh.bind(this)}
+                                onRefresh={this._onRefresh}
                             />
                     }>
                     <Text style={styles.eventTitle}>Nearest Events</Text>
@@ -172,19 +170,31 @@ var Events = React.createClass({
 });
 
 const styles = StyleSheet.create({
+    scrollView : {
+        flex : 1,
+        backgroundColor: '#E3F2FD',
+    },
+     header : {
+        paddingTop: 10,
+        paddingLeft : 20,
+        paddingBottom : 10,
+        paddingRight : 20,
+        height: 50,
+        flexDirection: 'row',
+    },
     container: {
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#F5FCFF',
-        borderWidth: 1,
-        borderRadius: 2,
-        borderColor: '#cdcb9e',
+        backgroundColor: 'white',
+
         marginLeft: 10,
         marginRight: 10,
         marginTop: 4,
-        elevation: 10
+        marginBottom: 4,
+        elevation: 2,
+        borderRadius : 1,
     },
     spinner: {
         opacity: 1
@@ -206,14 +216,14 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         fontWeight: 'bold',
         fontSize: 14,
-        color: "#424242"
+        color: "#424242",
     },
     title: {
         fontSize: 13,
         textAlign: 'left',
         marginLeft: 10,
         marginTop: 5,
-        color: "#464646"
+        color: "#464646",
     },
     date: {
         fontSize: 9,
@@ -252,35 +262,22 @@ const styles = StyleSheet.create({
         flex: 1
     },
     eventTitle : {
-        backgroundColor: '#f1f1f1',
+        backgroundColor: '#2196F3',
         textAlign : 'center',
         fontFamily : 'Noto',
-        fontSize: 30,
-        fontStyle: 'italic',
-        color: "#464646",
-        fontWeight: 'bold',
+        fontSize: 16,
+        color: "white",
         elevation: 3
     },
-    topContainer : {
-        paddingTop: 10,
-        paddingLeft : 20,
-        paddingBottom : 10,
-        paddingRight : 20,
-
-        height: 50,
-        flexDirection: 'row',
-        backgroundColor: '#6ABCE4',
-
-    },
     button_right : {
-        backgroundColor: '#f7f7f7',
+        backgroundColor: '#42A5F5',
         flex: 1,
         borderRadius: 4,
         paddingTop: 5,
         elevation: 3
     },
     button_left : {
-        backgroundColor: '#0aa494',
+        backgroundColor: 'white',
         flex: 1,
         borderRadius: 4,
         paddingTop: 5,
@@ -288,18 +285,12 @@ const styles = StyleSheet.create({
     },
     button_text_left : {
         textAlign : 'center',
-        color : 'white'
+        color : 'black'
     },
     button_text_right : {
         textAlign : 'center',
+        color : 'white'
     },
-    scrollViewTop : {
-    },
-    scrollView : {
-        flex : 1,
-        backgroundColor: '#6ABCE4',
-    }
-
 });
 
 module.exports = Events;
