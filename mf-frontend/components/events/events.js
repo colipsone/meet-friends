@@ -53,27 +53,24 @@ var Events = React.createClass({
 
     fetchData() {
         eventsService.getEvents((events) => {
-            events = events.map(function(event) {
-                return event;
+            events.forEach(function(event) {
+                event.from = localDate(event.from);
             });
             this.setState({
                 dataSource: this.state.dataSource.cloneWithRows(events),
                 loaded : true,
                 refreshing : false
             });
+            function localDate(date) {
+                //console.log(this.props.event.from);
+                var ms = Date.parse(date);
+                return new Date(ms).toLocaleString();
+            };
         });
     },
 
     componentDidMount() {
         this.fetchData();
-    },
-
-    localDate() {
-        console.log(this.props.event.from);
-        var ms = Date.parse(this.props.event.from);
-        return new Date(ms).toLocaleString();
-        //console.log('test');
-        //return 1;
     },
 
     render() {

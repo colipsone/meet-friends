@@ -144,7 +144,7 @@ class Authorization extends Component {
                             <Image style={styles.GoogleIcon} 
                                source={{uri: 'https://developers.google.com/identity/images/g-logo.png'}}
                             />
-                            <Text style={styles.GoogleButtonText}>SING IN WITH GOOGLE</Text>
+                            <Text style={styles.GoogleButtonText}>SIGN IN WITH GOOGLE</Text>
                         </View>
                     </TouchableHighlight>
                     <View>{this.state.progressBar}</View> 
