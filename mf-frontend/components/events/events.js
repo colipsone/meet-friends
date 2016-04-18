@@ -110,9 +110,9 @@ var Events = React.createClass({
         return (
             <TouchableHighlight
                 onPress={() => {
-                   // console.log(this);
+                    //console.log(event.id);
                     this.props.navigator.push({
-                    event_id : event.event_id,
+                    event_id : event.id,
                     view_id : 2
                 })
                 }}>

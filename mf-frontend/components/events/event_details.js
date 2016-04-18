@@ -36,36 +36,42 @@ import React, {
     TouchableHighlight
 } from 'react-native';
 
-var EventDetails = new React.createClass({
-    getInitialState(){
-        return {
-            description: MOKED_DATA[this.props.event_id - 1].description
+class EventDetails extends Component {
+    constructor(props) {
+    super(props);
+    console.log(this.props);
+    this.state = {
+            description: "dsds",
+            thumbnail : MOKED_DATA[1].userImage.thumbnail,
+            userName : MOKED_DATA[1].userName,
+            favorite : MOKED_DATA[1].userImage.starIcon,
+            title : MOKED_DATA[1].title,
+            //date : MOKED_DATA[this.props.event_id - 1].date
+            date : MOKED_DATA[1].date
         }
-    },
-
-    _handlePress(){
-        this.props.navigator.pop();
-    },
+    }
+    handlePress(){
+        this.props.navigator.pop()
+    }
     render(){
         return (
             <View style={styles.container}>
                 <View style={styles.topMenu}>
-                    <Text>{this.props.event_id}</Text>
                     <Image
-                        source={{ uri: MOKED_DATA[this.props.event_id - 1].userImage.thumbnail }}
+                        source={{ uri: this.props.thumbnail }}
                         style={styles.thumbnail}
                     />
-                    <Text style={styles.userName}>{MOKED_DATA[this.props.event_id - 1].userName}</Text>
+                    <Text style={styles.userName}>{this.state.userName}</Text>
                     <View style={styles.iconRow}>
                         <Image
-                            source={{ uri: MOKED_DATA[this.props.event_id - 1].userImage.starIcon }}
+                            source={{ uri: this.state.favorite }}
                             style={styles.icon}
                         />
                         <Image
                             source={{ uri: icon }}
                             style={styles.icon}
                         />
-                        <TouchableHighlight onPress={this._handlePress}>
+                        <TouchableHighlight onPress={this.handlePress.bind(this)}>
                             <Image
                                 source={{ uri: icon2 }}
                                 style={styles.icon}
@@ -75,9 +81,9 @@ var EventDetails = new React.createClass({
                 </View>
                 <View style={styles.info}>
                     <Text style={styles.label}>EVENT NAME</Text>
-                    <Text style={styles.basicText}>{MOKED_DATA[this.props.event_id - 1].title}</Text>
+                    <Text style={styles.basicText}>{this.state.title}</Text>
                     <Text style={styles.label}>TIME</Text>
-                    <Text style={styles.basicText}>{MOKED_DATA[this.props.event_id - 1].date}</Text>
+                    <Text style={styles.basicText}>{this.state.date}</Text>
                     <Text style={styles.label}>DESCRIPTION</Text>
                     <Text style={styles.description}>{this.state.description}</Text>
                 </View>
@@ -91,7 +97,7 @@ var EventDetails = new React.createClass({
             </View>
         )
     }
-});
+};
 
 const styles = StyleSheet.create({
     topMenu : {
