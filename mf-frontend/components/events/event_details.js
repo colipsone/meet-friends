@@ -39,20 +39,35 @@ import React, {
 class EventDetails extends Component {
     constructor(props) {
         super(props);
-        console.log(this.props);
+        //console.log(this.props);
+        this.state = {
+            event: {},
+            loaded : false
+        }
+    }
+
+    componentDidMount() {
+        this.fetchData();
+    }
+    
+    fetchData(){
         const EventDetailsController = require('./eventDetailsController');
         const eventDetailsController = new EventDetailsController();
         eventDetailsController.getEvent(this.props.event_id).then((event) => {
             this.state.event = event;
+            this.setState({
+                loaded: true
+            })
         });
-        this.state = {
-            event: {}
-        }
     }
+
     handlePress() {
         this.props.navigator.pop();
     }
     render() {
+        if (!this.state.loaded) {
+            return this.renderLoadingView();
+        }
         return (
             <View style={styles.container}>
                 <View style={styles.topMenu}>
@@ -96,6 +111,17 @@ class EventDetails extends Component {
             </View>
         )
     }
+
+    renderLoadingView() {
+        return(
+            <View style={styles.container}>
+                <Text>
+                    Loading events...
+                </Text>
+            </View>
+        );
+    }
+
 };
 
 const styles = StyleSheet.create({
