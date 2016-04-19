@@ -9,7 +9,7 @@ import React, {
 } from 'react-native';
 
 var Icon = require('react-native-vector-icons/FontAwesome');
-var EventDetailsController = require('./eventDetailsController');
+var EventDetailsController = require('./../eventDetailsController');
 
 var CreateEvent = React.createClass({
     getInitialState() {
