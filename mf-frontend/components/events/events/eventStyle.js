@@ -7,14 +7,6 @@ module.exports = StyleSheet.create({
         flex : 1,
         backgroundColor: '#E3F2FD'
     },
-    header : {
-        paddingTop: 10,
-        paddingLeft : 20,
-        paddingBottom : 10,
-        paddingRight : 20,
-        height: 50,
-        flexDirection: 'row'
-    },
     container: {
         flex: 1,
         flexDirection: 'row',
@@ -103,20 +95,6 @@ module.exports = StyleSheet.create({
         elevation: 2,
         marginTop: 2,
         marginBottom: 2
-    },
-    button_right : {
-        backgroundColor: '#42A5F5',
-        flex: 1,
-        borderRadius: 4,
-        paddingTop: 5,
-        elevation: 3
-    },
-    button_left : {
-        backgroundColor: 'white',
-        flex: 1,
-        borderRadius: 4,
-        paddingTop: 5,
-        elevation: 3
     },
     button_text_left : {
         textAlign : 'center',

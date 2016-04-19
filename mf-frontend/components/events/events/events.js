@@ -49,7 +49,7 @@ var Events = React.createClass({
             function localDate(date) {
                 var ms = Date.parse(date);
                 return new Date(ms).toLocaleString();
-            };
+            }
         });
     },
 
@@ -64,14 +64,6 @@ var Events = React.createClass({
 
         return (
             <View style={styles.scrollView}>
-                <View style={styles.header} >
-                    <TouchableHighlight style={styles.button_left}>
-                        <Text style={styles.button_text_left}>Event List</Text>
-                    </TouchableHighlight>
-                    <TouchableHighlight style={styles.button_right}>
-                        <Text style={styles.button_text_right}>Calendar</Text>
-                    </TouchableHighlight>
-                </View>
                 <ScrollView
                     refreshControl={
                         <RefreshControl
@@ -94,7 +86,6 @@ var Events = React.createClass({
         return (
             <TouchableHighlight
                 onPress={() => {
-                        //console.log(event.id);
                         this.props.navigator.push({
                             event_id: event.id,
                             view_id: 2
