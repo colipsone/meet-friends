@@ -9,6 +9,26 @@ class EventsService extends ServiceBase {
         this._currentUser = this._userService.currentUser;
     }
 
+    getEvent(id) {
+        const serverApiBaseUrl = this.serverApiBaseUrl;
+        return new Promise(function(resolve, reject) {
+            fetch(`${serverApiBaseUrl}/events/${id}`, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                })
+                .then(response => {
+                    response.json().then((jsonData) => {
+                        resolve(jsonData);
+                    });
+                })
+                .catch(error => {
+                    reject(error);
+                });
+        });
+    }
+
     getEvents(responseCallback) {
         fetch(`${this.serverApiBaseUrl}/users/nearestEvents?userId=${this._currentUser.id}`)
             .then(response => {

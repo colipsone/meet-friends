@@ -11,6 +11,10 @@
         return this._newEvent;
     }
 
+    getEvent(eventId) {
+        return this._eventsService.getEvent(eventId);
+    }
+
     setStartDate(date) {
         this._newEvent.from = date;
     }

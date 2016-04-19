@@ -38,22 +38,21 @@ import React, {
 
 class EventDetails extends Component {
     constructor(props) {
-    super(props);
-    console.log(this.props);
-    this.state = {
-            description: "dsds",
-            thumbnail : MOKED_DATA[1].userImage.thumbnail,
-            userName : MOKED_DATA[1].userName,
-            favorite : MOKED_DATA[1].userImage.starIcon,
-            title : MOKED_DATA[1].title,
-            //date : MOKED_DATA[this.props.event_id - 1].date
-            date : MOKED_DATA[1].date
+        super(props);
+        console.log(this.props);
+        const EventDetailsController = require('./eventDetailsController');
+        const eventDetailsController = new EventDetailsController();
+        eventDetailsController.getEvent(this.props.event_id).then((event) => {
+            this.state.event = event;
+        });
+        this.state = {
+            event: {}
         }
     }
-    handlePress(){
-        this.props.navigator.pop()
+    handlePress() {
+        this.props.navigator.pop();
     }
-    render(){
+    render() {
         return (
             <View style={styles.container}>
                 <View style={styles.topMenu}>
@@ -61,7 +60,7 @@ class EventDetails extends Component {
                         source={{ uri: this.props.thumbnail }}
                         style={styles.thumbnail}
                     />
-                    <Text style={styles.userName}>{this.state.userName}</Text>
+                    <Text style={styles.userName}>{this.state.event.userName}</Text>
                     <View style={styles.iconRow}>
                         <Image
                             source={{ uri: this.state.favorite }}
@@ -81,11 +80,11 @@ class EventDetails extends Component {
                 </View>
                 <View style={styles.info}>
                     <Text style={styles.label}>EVENT NAME</Text>
-                    <Text style={styles.basicText}>{this.state.title}</Text>
+                    <Text style={styles.basicText}>{this.state.event.title}</Text>
                     <Text style={styles.label}>TIME</Text>
-                    <Text style={styles.basicText}>{this.state.date}</Text>
+                    <Text style={styles.basicText}>{this.state.event.from}</Text>
                     <Text style={styles.label}>DESCRIPTION</Text>
-                    <Text style={styles.description}>{this.state.description}</Text>
+                    <Text style={styles.description}>{this.state.event.description}</Text>
                 </View>
                 <View style={styles.singed}>
                     <Text style={styles.label}>SINGED IN</Text>

@@ -90,9 +90,9 @@ var Events = React.createClass({
                 </View>
                 <ScrollView
                     refreshControl={
-                            <RefreshControl
-                                refreshing={this.state.refreshing}
-                                onRefresh={this._onRefresh}
+                        <RefreshControl
+                            refreshing={this.state.refreshing}
+                            onRefresh={this._onRefresh}
                             />
                     }>
                     <Text style={styles.eventTitle}>Nearest Events</Text>
@@ -103,22 +103,22 @@ var Events = React.createClass({
                     />
                 </ScrollView>
             </View>
-        )
+        );
     },
 
     renderEventList(event) {
         return (
             <TouchableHighlight
                 onPress={() => {
-                    //console.log(event.id);
-                    this.props.navigator.push({
-                    event_id : event.id,
-                    view_id : 2
-                })
-                }}>
+                        //console.log(event.id);
+                        this.props.navigator.push({
+                            event_id: event.id,
+                            view_id: 2
+                        });
+                    }}>
                 <View style={styles.container}>
                     <Image
-                        source={{uri: eventsService.serverApiBaseUrl + event.photoUrl}}
+                        source={{ uri: eventsService.serverApiBaseUrl + event.photoUrl }}
                         style={styles.thumbnail}
                     />
                     <View style={styles.leftContainer}>
@@ -141,20 +141,15 @@ var Events = React.createClass({
                         </Text>
                         <View style={styles.iconRow}>
                             <Image
-                                source={{uri: "http://icons.iconarchive.com/icons/elegantthemes/beautiful-flat/128/selftimer-icon.png"}}
-                                style={styles.icon}
-                            />
-                            <Image
-                                source={{uri: "http://icons.iconarchive.com/icons/elegantthemes/beautiful-flat/128/running-icon.png"}}
+                                source={{ uri: eventsService.serverApiBaseUrl + event.photoUrl }}
                                 style={styles.icon}
                             />
                         </View>
                     </View>
                 </View>
             </TouchableHighlight>
-        )
+        );
     },
-
     renderLoadingView() {
         return(
             <View style={styles.container}>
@@ -162,14 +157,14 @@ var Events = React.createClass({
                     Loading events...
                 </Text>
             </View>
-        )
+        );
     }
 });
 
 const styles = StyleSheet.create({
     scrollView : {
         flex : 1,
-        backgroundColor: '#E3F2FD',
+        backgroundColor: '#E3F2FD'
     },
      header : {
         paddingTop: 10,
@@ -177,7 +172,7 @@ const styles = StyleSheet.create({
         paddingBottom : 10,
         paddingRight : 20,
         height: 50,
-        flexDirection: 'row',
+        flexDirection: 'row'
     },
     container: {
         flex: 1,
@@ -191,7 +186,7 @@ const styles = StyleSheet.create({
         marginTop: 4,
         marginBottom: 4,
         elevation: 2,
-        borderRadius : 1,
+        borderRadius : 1
     },
     spinner: {
         opacity: 1
@@ -202,7 +197,7 @@ const styles = StyleSheet.create({
         borderRadius: 30,
         marginLeft: 10,
         borderColor: '#b8b7aa',
-        borderWidth: 1  ,
+        borderWidth: 1
     },
     leftContainer: {
         flex: 4
@@ -213,14 +208,14 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         fontWeight: 'bold',
         fontSize: 14,
-        color: "#424242",
+        color: "#424242"
     },
     title: {
         fontSize: 13,
         textAlign: 'left',
         marginLeft: 10,
         marginTop: 5,
-        color: "#464646",
+        color: "#464646"
     },
     date: {
         fontSize: 9,
