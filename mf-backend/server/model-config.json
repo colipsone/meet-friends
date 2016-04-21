@@ -44,5 +44,9 @@
   "container": {
     "dataSource": "storage",
     "public": true
+  },
+  "friend": {
+    "dataSource": "mongoDs",
+    "public": true
   }
 }

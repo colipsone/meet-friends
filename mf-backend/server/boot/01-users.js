@@ -22,19 +22,19 @@ module.exports = function (app) {
                 username: 'colipso',
                 email: 'colipsone@gmail.com',
                 password: '111'
+            },
+            {
+                login: 'yegor',
+                photoUrl: '/containers/users-photos/download/UePbdph.jpg',
+                username: 'yegor',
+                email: 'yegor@gmail.com',
+                password: '111'
             }
         ];
-
         users.forEach(function (user) {
             User.findOrCreate({where: { email: user.email }}, user, function(err, dbUser) {
                 if (err) throw err;
-                dbUser.events.create({
-                    from: '4/3/2016',
-                    title: 'Test event',
-                    type: 'Party'
-                }, function(err, dbEvent) {
-                    if (err) throw err;
-                });
+                
             });
         });
     }

@@ -28,6 +28,20 @@
       "type": "hasMany",
       "model": "event",
       "foreignKey": "userId"
+    },
+    "friendTo": {
+      "type": "hasMany",
+      "model": "user",
+      "foreignKey": "friendToId",
+      "keyThrough": "friendOfId",
+      "through": "friend"
+    },
+    "myFriends": {
+      "type": "hasMany",
+      "model": "user",
+      "foreignKey": "friendOfId",
+      "keyThrough": "friendToId",
+      "through": "friend"
     }
   },
   "acls": [],
