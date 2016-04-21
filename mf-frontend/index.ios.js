@@ -1,7 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- */
 'use strict';
 import React, {
   AppRegistry,
@@ -11,7 +7,7 @@ import React, {
   View
 } from 'react-native';
 
-class NewProject extends Component {
+class MeetFriends extends Component {
   render() {
     return (
       <View style={styles.container}>
@@ -49,4 +45,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('NewProject', () => NewProject);
+AppRegistry.registerComponent('MeetFriends', () => MeetFriends);

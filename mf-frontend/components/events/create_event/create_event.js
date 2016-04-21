@@ -5,11 +5,12 @@ import React, {
     TextInput,
     TouchableHighlight,
     View,
-    DatePickerAndroid
+    DatePickerAndroid,
+    TimePickerAndroid
 } from 'react-native';
 
 var Icon = require('react-native-vector-icons/FontAwesome');
-var EventDetailsController = require('./eventDetailsController');
+var EventDetailsController = require('./../eventDetailsController');
 
 var CreateEvent = React.createClass({
     getInitialState() {
@@ -27,7 +28,7 @@ var CreateEvent = React.createClass({
         };
     },
 
-    async showPicker(stateKey, setEventDate) {
+    async showDatePicker(stateKey, setEventDate) {
         try {
             const options = {
                 date: this.state.minDate,
@@ -47,6 +48,24 @@ var CreateEvent = React.createClass({
             console.warn(`Error in example '${stateKey}': `, message);
         }
     },
+
+    async showTimePicker(stateKey, options) {
+        try {
+            const {action, minute, hour} = await TimePickerAndroid.open(options);
+            var newState = {};
+            if (action === TimePickerAndroid.timeSetAction) {
+                newState[stateKey + 'Text'] = _formatTime(hour, minute);
+                newState[stateKey + 'Hour'] = hour;
+                newState[stateKey + 'Minute'] = minute;
+            } else if (action === TimePickerAndroid.dismissedAction) {
+                newState[stateKey + 'Text'] = 'dismissed';
+            }
+            this.setState(newState);
+        } catch ({code, message}) {
+            console.warn(`Error in example '${stateKey}': `, message);
+        }
+    },
+
     createEvent(){
         this.state.eventCtrl.save();
         this.props.navigator.push({
@@ -65,16 +84,30 @@ var CreateEvent = React.createClass({
                         <TextInput multiline={true} onChangeText={(text)=> this.state.eventCtrl.newEvent.description = text}></TextInput>
                     </View>
                     <View style={styles.dateContainer}>
-                        <TouchableHighlight style={{height:40, width: 120}} onPress={this.showPicker.bind(this, 'start', this.state.eventCtrl.setStartDate)}>
+                        <TouchableHighlight style={{height:40, width: 120}} onPress={this.showDatePicker.bind(this, 'start', this.state.eventCtrl.setStartDate)}>
                             <View style={styles.datePickerButton}>
                                 <Icon style={styles.icon} name="clock-o" size={15} color="#900" />
                                 <Text style={styles.text}>{this.state.startText}</Text>
                             </View>
                         </TouchableHighlight>
-                        <TouchableHighlight style={{height:40, width: 120}} onPress={this.showPicker.bind(this, 'end', this.state.eventCtrl.setEndDate)}>
+                        <TouchableHighlight style={{height:40, width: 120}} onPress={this.showDatePicker.bind(this, 'end', this.state.eventCtrl.setEndDate)}>
                             <View style={styles.datePickerButton}>
                                 <Icon style={styles.icon} name="clock-o" size={15} color="#900" />
                                 <Text style={styles.text}>{this.state.endText}</Text>
+                            </View>
+                        </TouchableHighlight>
+                    </View>
+                    <View style={styles.dateContainer}>
+                        <TouchableHighlight style={{height:40, width: 120}} onPress={this.showTimePicker.bind(this, 'startTime', this.state.eventCtrl.setStartDate)}>
+                            <View style={styles.datePickerButton}>
+                                <Icon style={styles.icon} name="clock-o" size={15} color="#900" />
+                                <Text style={styles.text}>{this.state.startTimeText}</Text>
+                            </View>
+                        </TouchableHighlight>
+                        <TouchableHighlight style={{height:40, width: 120}} onPress={this.showTimePicker.bind(this, 'endTime', this.state.eventCtrl.setEndDate)}>
+                            <View style={styles.datePickerButton}>
+                                <Icon style={styles.icon} name="clock-o" size={15} color="#900" />
+                                <Text style={styles.text}>{this.state.endTimeText}</Text>
                             </View>
                         </TouchableHighlight>
                     </View>
@@ -94,6 +127,10 @@ var CreateEvent = React.createClass({
         )
     }
 });
+
+function _formatTime(hour, minute) {
+  return hour + ':' + (minute < 10 ? '0' + minute : minute);
+}
 
 var styles = StyleSheet.create({
     container: {
