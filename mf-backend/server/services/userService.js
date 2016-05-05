@@ -187,13 +187,33 @@ var UserService = function(UserModel) {
     });
   }
 
+  var searchForUsers = function (searchPhrase) {
+    return new Promise((resolve, reject) => {
+      UserModel.find({
+        "where": {"or": [
+          {"username": {"like": searchPhrase}},
+          {"email": {"like": searchPhrase}},
+          {"firstName": {"like": searchPhrase}},
+          {"lastName": {"like": searchPhrase}}
+        ]
+      }
+      }, (err, users) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(users);
+      });
+    });
+  }
+
   //#endregion
 
   return {
     getNearestEvents: getNearestEvents,
     addToFriends: addToFriends,
     getFriends: getFriends,
-    removeFromFriends: removeFromFriends
+    removeFromFriends: removeFromFriends,
+    searchForUsers: searchForUsers
   };
 
 }

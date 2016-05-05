@@ -32,6 +32,13 @@ module.exports = function (User) {
 		});
 	};
 
+	User.searchForUsers = function (searchPhrase, callback) {
+		userServiceInst.searchForUsers(searchPhrase)
+		.then(result => {
+			callback(null, result);
+		});
+	};
+
 	User.remoteMethod('getNearestEvents', {
 		http: {path: '/nearestEvents', verb: 'get'},
 		accepts: [
@@ -58,5 +65,11 @@ module.exports = function (User) {
 	    http: { path: '/removeFromFriends', verb: 'get' },
 	    accepts: [{ arg: 'firstUserId', type: 'string' }, { arg: 'secondUserId', type: 'string' }],
 	    returns: { arg: 'message', type: 'string' }
+	});
+
+	User.remoteMethod('searchForUsers', {
+	    http: { path: '/searchForUsers', verb: 'get' },
+	    accepts: { arg: 'searchPhrase', type: 'string' },
+	    returns: { arg: 'users', type: 'Array' }
 	});
 };
