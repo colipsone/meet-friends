@@ -1,0 +1,46 @@
+{
+  "name": "friendInvitation",
+  "plural": "friendInvitations",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "inviteeId": {
+      "type": "string",
+      "required": true
+    },
+    "invitedById": {
+      "type": "string",
+      "required": true
+    },
+    "response": {
+      "type": "string",
+      "required": true
+    },
+    "createdOn": {
+      "type": "date",
+      "reqired": true
+    },
+    "updatedOn": {
+      "type": "date",
+      "reqired": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "inviteeUser": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "inviteeId"
+    },
+    "invitedByUser": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "invitedById"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

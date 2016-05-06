@@ -48,5 +48,9 @@
   "friend": {
     "dataSource": "mongoDs",
     "public": true
+  },
+  "friendInvitation": {
+    "dataSource": "mongoDs",
+    "public": true
   }
 }

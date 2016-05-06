@@ -7,11 +7,11 @@
     "validateUpsert": true
   },
   "properties": {
-    "friendOf": {
+    "friendOfId": {
       "type": "string",
       "required": true
     },
-    "friendTo": {
+    "friendToId": {
       "type": "string",
       "required": true
     }
