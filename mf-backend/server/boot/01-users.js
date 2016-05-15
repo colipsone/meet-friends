@@ -24,6 +24,27 @@ module.exports = function (app) {
                 password: '111'
             },
             {
+                login: 'colipso1',
+                photoUrl: '/containers/users-photos/download/UePbdph.jpg',
+                username: 'colipso1',
+                email: 'colipsone1@gmail.com',
+                password: '111'
+            },
+            {
+                login: 'colipso2',
+                photoUrl: '/containers/users-photos/download/UePbdph.jpg',
+                username: 'colipso2',
+                email: 'colipsone2@gmail.com',
+                password: '111'
+            },
+            {
+                login: 'colipso3',
+                photoUrl: '/containers/users-photos/download/UePbdph.jpg',
+                username: 'colipso3',
+                email: 'colipsone3@gmail.com',
+                password: '111'
+            },
+            {
                 login: 'yegor',
                 photoUrl: '/containers/users-photos/download/UePbdph.jpg',
                 username: 'yegor',
@@ -34,7 +55,7 @@ module.exports = function (app) {
         users.forEach(function (user) {
             User.findOrCreate({where: { email: user.email }}, user, function(err, dbUser) {
                 if (err) throw err;
-                
+
             });
         });
     }

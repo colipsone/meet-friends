@@ -21,6 +21,24 @@ class UserService extends ServiceBase {
         return instance._currentUser;
     }
 
+    search(searchPhrase) {
+      return new Promise((resolve, reject) => {
+              fetch(`${instance.serverApiBaseUrl}/users/searchForUsers?searchPhrase=${searchPhrase}`)
+              .then(response => {
+                  response.json().then((jsonData) => {
+                      if (!jsonData.error) {
+                          resolve(jsonData.users);
+                      } else {
+                          reject(jsonData.error.message);
+                      }
+                  });
+              })
+              .catch(error => {
+                  reject(error.message);
+              });
+      });
+    }
+
     login(email, password) {
         return new Promise((resolve, reject) => {
             fetch(`${instance.serverApiBaseUrl}/users/login`, {

@@ -1,3 +1,4 @@
+'use strict';
 module.exports = function(Event) {
 
   const _ = require("underscore");

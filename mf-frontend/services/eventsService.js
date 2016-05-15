@@ -30,14 +30,13 @@ class EventsService extends ServiceBase {
     }
 
     getEvents(responseCallback) {
-        fetch(`${this.serverApiBaseUrl}/users/nearestEvents?userId=${this._currentUser.id}`)
+        fetch(`${this.serverApiBaseUrl}/events/nearestEvents?userId=${this._currentUser.id}&from=${new Date('10.05.2014')}&to=${new Date('10.05.2016')}`)
             .then(response => {
                 response.json().then((jsonData) => {
                     responseCallback(jsonData.events);
                 });
             }).catch(this.handleError);
     }
-
     save(newEvent) {
         newEvent.userId = this._userService.currentUser.id;
         return new Promise((resolve, reject) => {

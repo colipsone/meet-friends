@@ -22,7 +22,7 @@ var eventsService = new EventsService();
 var Events = React.createClass({
 
     getInitialState() {
-        return { 
+        return {
             dataSource: new ListView.DataSource({
                 rowHasChanged: (row1, row2) => row1 !== row2
             }),

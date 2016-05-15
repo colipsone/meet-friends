@@ -1,3 +1,4 @@
+'use strict';
 class FriendService {
 
   constructor(friendInvitationModel, userModel, friendModel) {

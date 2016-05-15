@@ -26,7 +26,7 @@ class Authorization extends Component {
     capitalize(s)
     {
         return s[0].toUpperCase() + s.slice(1);
-    }    
+    }
 
     render() {
         return (
@@ -58,13 +58,13 @@ class Authorization extends Component {
                     <View>{this.state.messageError}</View>
                     <TouchableHighlight style={styles.SingInGoogleButton} onPress={this.onLoginPress.bind(this)}>
                         <View style={styles.SingInGoogleButtonView}>
-                            <Image style={styles.GoogleIcon} 
+                            <Image style={styles.GoogleIcon}
                                source={{uri: 'https://developers.google.com/identity/images/g-logo.png'}}
                             />
                             <Text style={styles.GoogleButtonText}>SIGN IN WITH GOOGLE</Text>
                         </View>
                     </TouchableHighlight>
-                    <View>{this.state.progressBar}</View> 
+                    <View>{this.state.progressBar}</View>
 
                 </View>
             </View>
@@ -73,9 +73,9 @@ class Authorization extends Component {
     onLoginPress() {
         const Progress = require('react-native-progress');
         const UserService = require('./../../services/userService');
-        
+
         this.setState({ progressBar: <Progress.Circle size={30} indeterminate={true} borderWidth={2} style={{ alignItems: 'center', padding: 10 }}/> });
-        
+
         const userService = new UserService();
         userService.login(this.state.username, this.state.password)
             .then((loggedIn) => {

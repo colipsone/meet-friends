@@ -1,3 +1,4 @@
+'use strict';
 class EventService {
 
   constructor(eventModel, userModel) {

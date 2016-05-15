@@ -1,3 +1,4 @@
+'use strict';
 module.exports = function(FriendInvitation) {
 
   const _ = require("underscore");
